@@ -3,13 +3,13 @@ import {useState, useEffect} from "react";
 import Form from "./components/Form/Form";
 function App(){
   
-  const [pets, setPets] = useState([]);
+  const [produto, setProduto] = useState([]);
   const [aberto, setAberto] = useState(false);
 
 
 
-  const upDatePets = value => {
-    setPets(value);
+  const upDateProduto = value => {
+    setProduto(value);
   }
 
   const upDateAberto = value => {
@@ -17,8 +17,8 @@ function App(){
   }
 
   useEffect(() => {
-    const data = localStorage.getItem('pets') ? JSON.parse(localStorage.getItem('pets')) : [];
-    setPets(data);
+    const data = localStorage.getItem('produto') ? JSON.parse(localStorage.getItem('produto')) : [];
+    setProduto(data);
   
   },[])
   const handleClick = () => {
@@ -30,15 +30,15 @@ function App(){
     <div>
        {!aberto && (
         <button className="btn" onClick={handleClick}>
-          Adicionar pets!
+          Adicionar produtos!
         </button>
       )}
 
 
 { aberto && <Form
           upDateAberto={upDateAberto}
-          upDatePets={upDatePets}
-          pets={pets}
+          upDateProduto={upDateProduto}
+          produto={setProduto}
         
         /> }
     </div>

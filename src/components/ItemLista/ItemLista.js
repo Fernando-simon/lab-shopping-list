@@ -1,9 +1,9 @@
 
 const ItemLista = props => {
-    const {pet} = props;
+    const {produto} = props;
 
-    const selectedPet = pet => {
-        localStorage.setItem('selectedPet', JSON.stringify(pet));
+    const selectedProduto = produto => {
+        localStorage.setItem('selectedProduto', JSON.stringify(produto));
 }
 
 const handleForm = () => {
@@ -13,9 +13,9 @@ const handleForm = () => {
 
     return(
         <div className="item-lista">
-            <div>{pet.nome}</div>
+            <div>{produto.nome}</div>
         <div>
-        <button onClick={() => {selectedPet(pet);handleForm()}}>Info</button>
+        <button onClick={() => {selectedProduto(pet);handleForm()}}>Info</button>
         </div>
         </div>
     )
