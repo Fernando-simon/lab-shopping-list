@@ -6,3 +6,11 @@ Componentes criados em sua extrutura: Lista e itens de lista, Formulário e um p
 
 ## Setup
 Passo a passo do setup (npm install + npm start)
+
+## Tecnologias 
+JavaScript
+HTML e CSS
+React
+
+
+
