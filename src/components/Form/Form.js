@@ -55,7 +55,7 @@ const Form = props => {
         }
 
         localStorage.removeItem('selectedProduto');
-        localStorage.setItem('pets', JSON.stringify(array));
+        localStorage.setItem('produtos', JSON.stringify(array));
         props.upDateProduto(array);
 
         props.upDateAberto(false);
