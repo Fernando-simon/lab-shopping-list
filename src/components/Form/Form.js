@@ -4,73 +4,73 @@ import './Form.css';
 
 const Form = props => {
     const [form, setForm] = useState([]);
-    const [pets, setPets] = useState({});
-    const [selectedPet, setSelectedPet] = useState();
+    const [produto, setProduto] = useState({});
+    const [selectedProduto, setSelectedProduto] = useState();
 
     useEffect(() => {
-        const pet = JSON.parse(localStorage.getItem('selectedPet'));
-        const lista = localStorage.getItem('pets') ? JSON.parse(localStorage.getItem('pets')) : [];
+        const produto = JSON.parse(localStorage.getItem('selectedProduto'));
+        const lista = localStorage.getItem('produto') ? JSON.parse(localStorage.getItem('produto')) : [];
         setForm(lista)
-        if (pet) {
+        if (produto) {
 
-            setSelectedPet(pet);
-            setPets(pet);
+            setSelectedProduto(produto);
+            setProduto(produto);
         }
         
     }, []);
 
     const handleChange = event => {
-        setPets({
-            ...pets,
+        setProduto({
+            ...produto,
             [event.target.name]: event.target.value
         })
     }
 
-    const handleCastrado = event => {
-        setPets({
-            ...pets,
-            castrado: event.target.checked ? true : false
+    const handleComprado = event => {
+        setProduto({
+            ...produto,
+            comprado: event.target.checked ? true : false
         })
     }
     const handleSubmit = event => {
         event.preventDefault();
         let array = [];
-        const formData = pets;
-        if (!('castrado' in pets)) {
-            formData.castrado = false;
+        const formData = produto;
+        if (!('comprado' in produto)) {
+            formData.comprado = false;
         }
-        if (selectedPet) {
-            const updatedPets = form.map(pet => {
-                if (JSON.stringify(pet) === JSON.stringify(selectedPet)) {
+        if (selectedProduto) {
+            const updatedProduto = form.map(produto => {
+                if (JSON.stringify(produto) === JSON.stringify(selectedProduto)) {
                     return formData;
                 }
                 else {
 
-                    return pet;
+                    return produto;
                 }
             });
-            array = updatedPets
+            array = updatedProduto
         } else {
             array = [...form, formData];
         }
 
-        localStorage.removeItem('selectedPet');
+        localStorage.removeItem('selectedProduto');
         localStorage.setItem('pets', JSON.stringify(array));
-        props.upDatePets(array);
+        props.upDateProduto(array);
 
         props.upDateAberto(false);
     }
 
-    const removePet = selectedPet => {
-        const petIndex = pets.findIndex(pets => JSON.stringify(pets) === JSON.stringify(selectedPet));
+    const removeProduto = selectedProduto => {
+        const produtoIndex = produto.findIndex(produto => JSON.stringify(produto) === JSON.stringify(selectedProduto));
 
-        pets.splice(petIndex, 1);
-        console.log(pets);
-        localStorage.setItem('pets', JSON.stringify(pets));
-        props.upDatePets(pets);
+        produto.splice(produtoIndex, 1);
+        console.log(produto);
+        localStorage.setItem('produto', JSON.stringify(produto));
+        props.upDateProduto(produto);
         props.upDateAberto(false);
 
-        localStorage.removeItem('selectedPets');
+        localStorage.removeItem('selectedProduto');
     }
 
     const handeleCancel = () => {
@@ -82,49 +82,49 @@ const Form = props => {
         <form onSubmit={event => handleSubmit(event)}>
             <div className="form-row">
                 <label>
-                    Nome <br />
-                    <input type="text" name="nome"
-                        onChange={event => handleChange(event)} value={pets.nome} required />
+                    Nome do produto <br />
+                    <input type="text" name="nome do produto"
+                        onChange={event => handleChange(event)} value={produto.nome} required />
                 </label>
             </div>
 
             <div className="form-row">
                 <label>
-                    Idade <br />
-                    <input type="number" name="idade"
-                        onChange={event => handleChange(event)} value={pets.idade} required />
+                    Quantidade  <br />
+                    <input type="number" name="Quantidade"
+                        onChange={event => handleChange(event)} value={produto.quantidade} required />
                 </label>
             </div>
 
             <div className="form-row">
                 <label>
-                    Espécie <br />
-                    <input type="text" name="especie"
-                        onChange={event => handleChange(event)} value={pets.especie} required />
+                    Novo produto <br />
+                    <input type="text" name="novo produto"
+                        onChange={event => handleChange(event)} value={produto.novo} required />
                 </label>
             </div>
 
             <div className="form-row">
                 <label>
-                    Raça <br />
-                    <input type="text" name="raca"
-                        onChange={event => handleChange(event)} value={pets.raca} required />
+                    Produtos inseridos <br />
+                    <input type="text" name="Produtos inseridos"
+                        onChange={event => handleChange(event)} value={produto.inseridos} required />
                 </label>
             </div>
 
             <div className="form-row">
                 <label>
-                    Castrado <br />
-                    <input type="checkbox" name="castrado" onChange={event => handleCastrado(event)} checked={form.castrado} />
+                    Comprado <br />
+                    <input type="checkbox" name="comprado" onChange={event => handleComprado(event)} checked={form.handleComprado} />
 
                 </label>
             </div>
             <div />
 
-            <button type="submit" className="btn">{selectedPet ? 'editar' : 'adcionar'}</button>
-            {selectedPet ? <button onClick={event => { event.preventDefault(); removePet(selectedPet); }} className="btn">Excluir</button> : <></>}
+            <button type="submit" className="btn">{selectedProduto ? 'editar' : 'adcionar'}</button>
+            {selectedProduto ? <button onClick={event => { event.preventDefault(); removeProduto(selectedProduto); }} className="btn">Excluir produto</button> : <></>}
             <button className="btn" onClick={() => { handeleCancel() }}>
-                Cancelar
+                Excluir produto!
             </button>
         </form>
     )

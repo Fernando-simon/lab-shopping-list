@@ -6,24 +6,24 @@ import { useEffect, useState } from 'react';
 
 const Lista = props => {
 
-    const [pets, setPets] = useState([]);
-    const [castrado, setCastrado] = useState(false);
-    const [selectedPets, setSelectedPets] = useState([])
+    const [pets, setProduto] = useState([]);
+    const [comprado, setComprado] = useState(false);
+    const [selectedPruduto, setSelectedProduto] = useState([])
 
     useEffect(() => {
-      const data = localStorage.getItem('pets') ? JSON.parse(localStorage.getItem('pets')) : null;
-            setPets(data);
-            setSelectedPets(data);
+      const data = localStorage.getItem('produto') ? JSON.parse(localStorage.getItem('produto')) : null;
+            setProduto(data);
+            setSelectedProduto(data);
         }, []);
         
     const handleFiltro = () => {
-        const selected =  pets.filter(pet => pet.castrado === castrado);
-        setSelectedPets(selected);
+        const selected =  produto.filter(produto => produto.comprado === comprado);
+        setSelectedComprado(selected);
     }
 
     const limpaFiltro = () => {
         setCastrado(false);
-        setSelectedPets(pets);
+        setSelectedPets(produto);
     }
 
     return (
@@ -31,16 +31,16 @@ const Lista = props => {
             <form onSubmit={e => e.preventDefault()}>
                 <b>Filtro</b> <br/>
                 <label>
-                    Castrado
-                    <input type="checkbox"name="castrado"
-                    onChange={event => setCastrado(!castrado)} checked={castrado}/>
+                    Comprado
+                    <input type="checkbox"name="comprado"
+                    onChange={event => setCastrado(!comprado)} checked={comprado}/>
                     </label>
                     <br/>
                     <button onClick={handleFiltro}>Filtrar</button>
                     <button onClick={limpaFiltro}>Limpar</button>
                     </form>
-    {selectedPets && selectedPets.map(pet => 
-       <ItemLista pet={pet} pets={pets} id={pet.ItemLista} />)}
+    {selectedProduto && selectedProduto.map(produto => 
+       <ItemLista produto={produto} produtos={produtos} id={produto.ItemLista} />)}
     </div>
     
     );
